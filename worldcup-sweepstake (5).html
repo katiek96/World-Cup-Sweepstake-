@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>World Cup 2026 Sweepstake</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0f;color:#fff;font-family:Georgia,'Times New Roman',serif;min-height:100vh;padding:24px 16px 48px}
+.page{max-width:480px;margin:0 auto}
+.title{text-align:center;font-size:clamp(24px,7vw,36px);font-weight:900;letter-spacing:.12em;margin:8px 0 4px;background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.subtitle{text-align:center;color:#888;font-size:13px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:28px}
+.label{display:block;color:#aaa;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;margin-top:4px}
+input[type=text]{display:block;width:100%;background:#111;border:1px solid #333;border-radius:8px;padding:10px 14px;color:#fff;font-size:15px;margin-bottom:8px;outline:none;font-family:inherit}
+input[type=text]:focus{border-color:#FFD700}
+.btn-primary{display:block;width:100%;padding:15px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:900;font-size:17px;letter-spacing:.1em;border:none;border-radius:12px;cursor:pointer;font-family:inherit;text-transform:uppercase;margin-top:8px}
+.btn-ghost{display:block;width:100%;padding:12px;background:transparent;border:1px solid #222;color:#555;border-radius:12px;cursor:pointer;font-size:14px;font-family:inherit;margin-top:10px}
+.info-box{background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:14px 16px;margin-bottom:22px;color:#888;font-size:13px;line-height:1.7}
+.info-box strong{color:#FFD700}
+.num-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.num-btn{width:44px;height:44px;border-radius:8px;border:1px solid #333;background:#111;color:#666;font-size:16px;cursor:pointer;font-family:inherit}
+.num-btn.active{background:#FFD700;color:#000;border-color:#FFD700;font-weight:bold}
+.player-btn{display:flex;align-items:center;gap:14px;background:#111;border-radius:12px;padding:15px 18px;cursor:pointer;text-align:left;font-family:inherit;width:100%;margin-bottom:10px;border:1px solid transparent}
+.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0}
+.tier-slot{border-radius:14px;padding:16px 18px;margin-bottom:12px;transition:border-color .3s}
+.tier-tag{display:inline-block;font-size:11px;border-radius:10px;padding:2px 10px;margin-bottom:12px;letter-spacing:.05em}
+.draw-btn{width:100%;border-radius:10px;padding:14px;cursor:pointer;font-size:15px;font-family:inherit;font-weight:bold;display:flex;align-items:center;justify-content:center;gap:10px;border-style:dashed}
+.team-revealed{display:flex;align-items:center;gap:12px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+.locked-msg{color:#2a2a2a;font-size:13px;display:flex;align-items:center;gap:8px}
+.spinning{font-size:36px;animation:spin .5s linear infinite;display:inline-block}
+.well-done{background:#111;border:1px solid #2a2a2a;border-radius:12px;padding:18px;text-align:center;margin-bottom:16px;animation:fadeIn .5s ease}
+.qr-wrap{background:#fff;border-radius:16px;padding:16px;display:inline-block;margin:0 auto}
+#qr-canvas{display:block}
+@keyframes popIn{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+// ── QR Code library (qrcodejs, MIT licence, inlined) ──────────────────────
+// Minified source from github.com/davidshimjs/qrcodejs
+var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this.parsedData=[];for(var b=[],d=0,e=this.data.length;e>d;d++){var f=this.data.charCodeAt(d);if(f>65536?(b[0]=240|(1835008&f)>>>18,b[1]=128|(258048&f)>>>12,b[2]=128|(4032&f)>>>6,b[3]=128|63&f):f>2048?(b[0]=224|(61440&f)>>>12,b[1]=128|(4032&f)>>>6,b[2]=128|63&f):f>128?(b[0]=192|(1984&f)>>>6,b[1]=128|63&f):b[0]=f,b.length=b.length||1,this.parsedData=this.parsedData.concat(b),b=[]);}this.parsedData.length!=this.data.length&&(this.parsedData.unshift(191),this.parsedData.unshift(187),this.parsedData.unshift(239))}function b(a,b){this.typeNumber=a,this.errorCorrectLevel=b,this.modules=null,this.moduleCount=0,this.dataCache=null,this.dataList=[]}function i(a,b){if(void 0==a.length)throw new Error(a.length);for(var c=0,d=0;d<a.length;d++)c+=b[d]*Math.pow(2,a.length-d-1);return c}function j(a,b){for(var c=a,d=0;c>=1;)c>>=1,d++;for(var e=new Array(b-d+1).join("0")+a.toString(2),f=e,g=0;g<e.length;g++)if("1"==e[g]){f=e.slice(g);break}for(;f.length<b;)f+="0";return f}function k(a,b,c){for(var d=b[0],e=1;e<b.length;e++)d=d.get(a.get(e-1))^b[e];return d}function l(a){switch(a){case 1:return[1,0,0,0,1,1,1];case 2:return[1,1,0,1,1,0,0];case 3:return[1,1,1,1,0,1,0];case 4:return[1,0,1,0,1,0,1];case 5:return[1,0,0,0,1,0,1];case 6:return[1,1,0,1,0,1,1];case 7:return[0,0,0,0,1,1,0]}}function m(a,b){for(var c=0,d=0,e=0,f=new Array(b.moduleCount),g=0;g<b.moduleCount;g++){f[g]=new Array(b.moduleCount);for(var h=0;h<b.moduleCount;h++)f[g][h]=b.isDark(g,h)}for(var i=0;i<f.length;i++)for(var j=0;j<f[i].length;j++){var k=i+1<f.length&&!f[i+1][j],l=j+1<f[i].length&&!f[i][j+1],m=i+1<f.length&&j+1<f[i].length&&!f[i+1][j+1];f[i][j]&&(k&&l&&!m||!k&&!l&&m)&&c++,!f[i][j]&&(k&&l&&!m||!k&&!l&&m)&&d++;var n=0;5<=j&&f[i][j]&&f[i][j-1]&&f[i][j-2]&&f[i][j-3]&&f[i][j-4]&&(n+=3),5<=i&&f[i][j]&&f[i-1][j]&&f[i-2][j]&&f[i-3][j]&&f[i-4][j]&&(n+=3),e+=n}for(var o=0,p=0;p<f.length;p++){o=0;for(var q=0;q<f[p].length;q++)f[p][q]&&o++}return 3*(Math.abs(100*o/(f.length*f.length)-50)/5)+c+d+e}a.prototype={getLength:function(){return this.parsedData.length},write:function(a){for(var b=0,c=this.parsedData.length;c>b;b++)a.put(this.parsedData[b],8)}};var c={MODE_NUMBER:1,MODE_ALPHA_NUM:2,MODE_8BIT_BYTE:4,MODE_KANJI:8},d={L:1,M:0,Q:3,H:2},e={PATTERN000:0,PATTERN001:1,PATTERN010:2,PATTERN011:3,PATTERN100:4,PATTERN101:5,PATTERN110:6,PATTERN111:7};b.prototype={addData:function(b){var c=new a(b);this.dataList.push(c),this.dataCache=null},isDark:function(a,b){if(0>a||this.moduleCount<=a||0>b||this.moduleCount<=b)throw new Error(a+","+b);return this.modules[a][b]},getModuleCount:function(){return this.moduleCount},make:function(){if(1>this.typeNumber){for(var a=1,a=1;40>=a;a++){for(var b=f.getRSBlocks(a,this.errorCorrectLevel),c=new h,d=0,e=0;e<b.length;e++)d+=b[e].dataCount;for(var g=0,e=0;e<this.dataList.length;e++)g+=this.dataList[e].getLength();if(d>=g)break}this.typeNumber=a}this.makeImpl(!1,this.getBestMaskPattern())},makeImpl:function(a,c){this.moduleCount=4*this.typeNumber+17,this.modules=new Array(this.moduleCount);for(var d=0;d<this.moduleCount;d++){this.modules[d]=new Array(this.moduleCount);for(var e=0;e<this.moduleCount;e++)this.modules[d][e]=null}this.setupPositionProbePattern(0,0),this.setupPositionProbePattern(this.moduleCount-7,0),this.setupPositionProbePattern(0,this.moduleCount-7),this.setupPositionAdjustPattern(),this.setupTimingPattern(),this.setupTypeInfo(a,c),7<=this.typeNumber&&this.setupTypeNumber(a),null==this.dataCache&&(this.dataCache=b.createData(this.typeNumber,this.errorCorrectLevel,this.dataList)),this.mapData(this.dataCache,c)},setupPositionProbePattern:function(a,b){for(var c=-1;7>=c;c++)if(!(-1>a+c||this.moduleCount<=a+c))for(var d=-1;7>=d;d++)-1>b+d||this.moduleCount<=b+d||(this.modules[a+c][b+d]=c>=0&&6>=c&&(0==d||6==d)||d>=0&&6>=d&&(0==c||6==c)||c>=2&&4>=c&&d>=2&&4>=d?!0:!1)},getBestMaskPattern:function(){for(var a=0,b=0,c=0;8>c;c++){this.makeImpl(!0,c);var d=m(0,this);a>d||0==c?(a=d,b=c):void 0}return b},setupTimingPattern:function(){for(var a=8;a<this.moduleCount-8;a++)null==this.modules[a][6]&&(this.modules[a][6]=0==a%2);for(var b=8;b<this.moduleCount-8;b++)null==this.modules[6][b]&&(this.modules[6][b]=0==b%2)},setupPositionAdjustPattern:function(){for(var a=g.getPatternPosition(this.typeNumber),b=0;b<a.length;b++)for(var c=0;c<a.length;c++){var d=a[b],e=a[c];if(null==this.modules[d][e])for(var f=-2;2>=f;f++)for(var h=-2;2>=h;h++)this.modules[d+f][e+h]=-2==f||2==f||-2==h||2==h||0==f&&0==h?!0:!1}},setupTypeNumber:function(a){for(var b=j(this.typeNumber,18),c=0;18>c;c++){var d=!a&&1==(b[c]-0);this.modules[Math.floor(c/3)][c%3+this.moduleCount-8-3]=d}for(var e=0;18>e;e++){var d=!a&&1==(b[e]-0);this.modules[e%3+this.moduleCount-8-3][Math.floor(e/3)]=d}},setupTypeInfo:function(a,b){for(var c=d[this.errorCorrectLevel]<<3|b,e=l(c),f=0;15>f;f++){var g=!a&&1==(e[f]-0);6>f?this.modules[f][8]=g:8>f?this.modules[f+1][8]=g:this.modules[this.moduleCount-15+f][8]=g}for(var h=0;15>h;h++){var g=!a&&1==(e[h]-0);8>h?this.modules[8][this.moduleCount-h-1]=g:9>h?this.modules[8][15-h-1+1]=g:this.modules[8][15-h-1]=g}this.modules[this.moduleCount-8][8]=!a},mapData:function(a,b){for(var c=-1,d=this.moduleCount-1,e=7,f=0,g=this.moduleCount-1;g>=1;g-=2){6==g&&g--;for(;;){for(var h=0;2>h;h++)if(null==this.modules[d][g-h]){var j=!1;f<a.length&&(j=1==(a[f]>>>e&1)),n(b,d,g-h)&&(j=!j),this.modules[d][g-h]=j,e--,-1==e&&(f++,e=7)}if(d+=c,0>d||this.moduleCount<=d){d-=c,c=-c;break}}}},static:{PAD0:236,PAD1:17,createData:function(a,c,d){for(var e=f.getRSBlocks(a,c),g=new h,i=0;i<d.length;i++){var j=d[i];g.put(j.mode,4),g.put(j.getLength(),n(j.mode,a)),j.write(g)}for(var k=0,i=0;i<e.length;i++)k+=e[i].dataCount;if(g.getLengthInBits()>8*k)throw new Error("code length overflow. ("+g.getLengthInBits()+">"+8*k+")");for(g.getLengthInBits()+4<=8*k&&g.put(0,4);0!=g.getLengthInBits()%8;)g.putBit(!1);for(;;){if(g.getLengthInBits()>=8*k)break;if(g.put(b.PAD0,8),g.getLengthInBits()>=8*k)break;g.put(b.PAD1,8)}return b.createBytes(g,e)},createBytes:function(a,b){for(var c=0,d=0,e=0,f=new Array(b.length),g=new Array(b.length),h=0;h<b.length;h++){var j=b[h].dataCount,l=b[h].totalCount-j;d=Math.max(d,j),e=Math.max(e,l),f[h]=new Array(j);for(var m=0;m<f[h].length;m++)f[h][m]=255&a.buffer[c++];g[h]=new Array(l);for(var m=0;m<g[h].length;m++)g[h][m]=0}for(var n=new Array(b.length),o=0,h=0;h<b.length;h++)n[h]=0;for(var p=new Array(d+e),m=0;d>m;m++)for(var h=0;h<b.length;h++)m<f[h].length&&(p[o++]=f[h][n[h]++]);for(var m=0;e>m;m++)for(var h=0;h<b.length;h++)m<g[h].length&&(p[o++]=g[h][n[h]++]);return p}}};var f={getBCHTypeInfo:function(a){for(var b=a<<10;o(b)-o(1335)>=0;)b^=1335<<o(b)-o(1335);return 21522^(a<<10|b)},getBCHTypeNumber:function(a){for(var b=a<<12;o(b)-o(7973)>=0;)b^=7973<<o(b)-o(7973);return a<<12|b},getPatternPosition:function(a){return p[a-1]},getMaskFunction:function(a){switch(a){case e.PATTERN000:return function(a,b){return(a+b)%2==0};case e.PATTERN001:return function(a,b){return a%2==0};case e.PATTERN010:return function(a,b){return b%3==0};case e.PATTERN011:return function(a,b){return(a+b)%3==0};case e.PATTERN100:return function(a,b){return(Math.floor(a/2)+Math.floor(b/3))%2==0};case e.PATTERN101:return function(a,b){return a*b%2+a*b%3==0};case e.PATTERN110:return function(a,b){return(a*b%2+a*b%3)%2==0};case e.PATTERN111:return function(a,b){return(a*b%3+(a+b)%2)%2==0};default:throw new Error("bad maskPattern:"+a)}},getErrorCorrectPolynomial:function(a){for(var b=new r([1],0),c=0;a>c;c++)b=b.multiply(new r([1,q.gexp(c)],0));return b},getLengthInBits:function(a,b){if(b>=1&&10>b)switch(a){case c.MODE_NUMBER:return 10;case c.MODE_ALPHA_NUM:return 9;case c.MODE_8BIT_BYTE:return 8;case c.MODE_KANJI:return 8;default:throw new Error("mode:"+a)}else if(27>b)switch(a){case c.MODE_NUMBER:return 12;case c.MODE_ALPHA_NUM:return 11;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 10;default:throw new Error("mode:"+a)}else{if(!(40>=b))throw new Error("type:"+b);switch(a){case c.MODE_NUMBER:return 14;case c.MODE_ALPHA_NUM:return 13;case c.MODE_8BIT_BYTE:return 16;case c.MODE_KANJI:return 12;default:throw new Error("mode:"+a)}}},getRSBlocks:function(a,b){var c=s(a,b);if(void 0==c)throw new Error("bad rs block @ typeNumber:"+a+"/errorCorrectLevel:"+b);for(var d=c.length/3,e=[],f=0;d>f;f++)for(var g=c[3*f+0],h=c[3*f+1],i=c[3*f+2],j=0;g>j;j++)e.push(new t(h,i));return e}};function n(a,b){switch(a){case c.MODE_NUMBER:return f.getLengthInBits(c.MODE_NUMBER,b);case c.MODE_ALPHA_NUM:return f.getLengthInBits(c.MODE_ALPHA_NUM,b);case c.MODE_8BIT_BYTE:return f.getLengthInBits(c.MODE_8BIT_BYTE,b);case c.MODE_KANJI:return f.getLengthInBits(c.MODE_KANJI,b);default:throw new Error("mode:"+a)}}function o(a){var b=0;for(;0!=a;)b++,a>>>=1;return b}var g={getPatternPosition:function(a){return p[a-1]}},h=function(){this.buffer=[],this.length=0,this.get=function(a){var b=Math.floor(a/8);return 1==(this.buffer[b]>>>7-a%8&1)},this.put=function(a,b){for(var c=0;b>c;c++)this.putBit(1==(a>>>b-c-1&1))},this.getLengthInBits=function(){return this.length},this.putBit=function(a){var b=Math.floor(this.length/8);this.buffer.length<=b&&this.buffer.push(0),a&&(this.buffer[b]|=128>>>this.length%8),this.length++}};var p=[[6,18],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50],[6,30,54],[6,32,58],[6,34,62],[6,26,46,66],[6,26,48,70],[6,26,50,74],[6,30,54,78],[6,30,56,82],[6,30,58,86],[6,34,62,90],[6,28,50,72,94],[6,26,50,74,98],[6,30,54,78,102],[6,28,54,80,106],[6,32,58,84,110],[6,30,58,86,114],[6,34,62,90,118],[6,26,50,74,98,122],[6,30,54,78,102,126],[6,26,52,78,104,130],[6,30,56,82,108,132],[6,34,60,86,112,136],[6,30,58,86,114,142],[6,34,62,90,118,146],[6,30,54,78,102,126,150],[6,24,50,76,102,128,154],[6,28,54,80,106,132,158],[6,32,58,84,110,136,162],[6,26,54,82,110,138,166],[6,30,58,86,114,142,170]],q={glog:function(a){if(1>a)throw new Error("glog("+a+")");return u[a]},gexp:function(a){for(;0>a;)a+=255;for(;a>=256;)a-=255;return v[a]}},r=function(a,b){if(void 0==a.length)throw new Error(a.length);this.num=new Array(a.length+b);for(var c=0;c<a.length;c++)this.num[c]=a[c];for(var c=a.length;c<a.length+b;c++)this.num[c]=0,this.get=function(a){return this.num[a]},this.getLength=function(){return this.num.length},this.multiply=function(a){for(var b=new Array(this.getLength()+a.getLength()-1),c=0;c<this.getLength();c++)for(var d=0;d<a.getLength();d++)b[c+d]^=q.gexp(q.glog(this.get(c))+q.glog(a.get(d)));return new r(b,0)},this.mod=function(a){if(this.getLength()-a.getLength()<0)return this;var b=q.glog(this.get(0))-q.glog(a.get(0));for(var c=new Array(this.getLength()),d=0;d<this.getLength();d++)c[d]=this.get(d);for(var d=0;d<a.getLength();d++)c[d]^=q.gexp(q.glog(a.get(d))+b);return new r(c,0).mod(a)}}};var s=function(a,b){var c=null;switch(b){case d.L:c=w[a];break;case d.M:c=x[a];break;case d.Q:c=y[a];break;case d.H:c=z[a]}if(void 0==c)return null;for(var e=[],f=0;f<c.length;f+=3)e.push(c[f],c[f+1],c[f+2]);return e},t=function(a,b){this.totalCount=a,this.dataCount=b},u=[],v=[];!function(){for(var a=1,b=0;255>b;b++)v[b]=a,u[a]=b,a<<=1,a>=256&&(a^=285)}();var w=[null,[1,26,19],[1,44,34],[1,70,55],[1,100,80],[1,134,108],[2,86,68],[4,98,78],[2,242,97,2,242,121],[2,146,116,2,146,126],[4,86,68,4,86,68],[4,100,81,4,100,81],[2,116,92,6,116,92],[4,133,107,4,133,107],[3,145,115,5,145,115],[5,109,87,5,109,87],[5,122,98,5,122,98],[1,135,107,6,135,107],[5,150,120,4,150,113],[3,141,113,6,141,113],[3,135,107,8,135,107],[4,144,116,4,144,116],[2,144,115,7,144,115],[4,151,121,5,151,121],[6,147,117,4,147,117],[8,132,106,4,132,106],[10,142,114,2,142,114],[8,152,122,4,152,122],[3,147,117,10,147,117],[7,146,116,7,146,116],[5,145,115,10,145,115],[13,142,115,3,142,115],[17,142,115,0,142,115],[17,143,115,1,143,115],[13,144,115,6,144,115],[12,144,113,7,144,113],[6,144,114,14,144,114],[17,145,116,4,145,116],[4,145,115,18,145,115],[20,143,115,4,143,115],[19,156,126,6,156,126]],x=[null,[1,26,16],[1,44,28],[1,70,44],[2,50,32],[2,67,43],[4,43,27],[4,49,31],[2,60,38,2,60,46],[3,58,36,2,58,44],[4,69,43,1,69,43],[1,80,50,4,80,50],[6,58,36,2,58,46],[8,59,37,1,59,47],[4,64,40,5,64,40],[5,65,41,5,65,41],[7,73,45,3,73,45],[10,74,46,1,74,46],[9,69,43,4,69,43],[3,70,44,11,70,44],[3,67,41,13,67,41],[17,68,42],[17,74,46],[4,75,47,14,75,47],[6,73,45,14,73,45],[8,75,47,13,75,47],[19,74,46,4,74,46],[22,73,45,3,73,45],[3,73,45,23,73,45],[21,73,45,7,73,45],[19,75,47,10,75,47],[2,74,46,29,74,46],[10,74,46,23,74,46],[14,74,46,21,74,46],[14,74,46,23,74,46],[12,75,47,26,75,47],[6,75,47,34,75,47],[29,74,46,14,74,46],[13,74,46,32,74,46],[40,75,47,7,75,47],[18,75,47,31,75,47]],y=[null,[1,26,13],[1,44,22],[2,35,17],[2,50,24],[2,33,20,2,33,20],[4,43,19],[2,32,14,4,32,14],[4,40,18,2,40,22],[4,36,16,4,36,20],[6,43,19,2,43,19],[4,50,22,4,50,22],[4,46,20,6,46,20],[5,44,20,6,44,20],[6,36,16,8,36,16],[8,37,17,8,37,17],[8,45,19,4,45,19],[5,46,20,10,46,20],[4,43,19,14,43,19],[11,43,19,11,43,19],[5,44,20,16,44,20],[11,49,22,14,49,22],[3,44,20,22,44,20],[13,44,20,13,44,20],[5,41,18,27,41,18],[15,42,18,18,42,18],[1,50,22,33,50,22],[8,50,22,26,50,22],[15,47,21,25,47,21],[42,45,19,1,45,19],[10,46,20,35,46,20],[19,46,20,22,46,20],[28,46,20,16,46,20],[35,46,20,10,46,20],[1,53,23,50,53,23],[42,46,20,15,46,20],[28,46,20,30,46,20],[10,46,20,56,46,20],[29,46,20,38,46,20],[38,46,20,29,46,20]],z=[null,[1,26,9],[1,44,16],[2,35,13],[4,25,9],[2,33,11,2,33,11],[4,43,15],[4,39,13],[4,40,14,2,40,14],[4,36,12,4,36,12],[6,43,15,2,43,15],[3,36,12,8,36,12],[7,45,16,4,45,16],[12,36,12,4,36,12],[11,36,12,5,36,12],[11,36,12,7,36,12],[3,45,15,13,45,15],[2,42,14,17,42,14],[2,42,14,19,42,14],[9,39,13,16,39,13],[15,43,15,10,43,15],[19,46,16,6,46,16],[34,37,13],[16,45,15,14,45,15],[30,46,16,2,46,16],[22,45,15,13,45,15],[33,46,16,4,46,16],[12,46,16,28,46,16],[11,45,15,31,45,15],[19,45,15,26,45,15],[23,45,15,25,45,15],[23,45,15,28,45,15],[19,45,15,35,45,15],[11,45,15,46,45,15],[59,46,16,1,46,16],[22,45,15,41,45,15],[2,45,15,64,45,15],[24,45,15,46,45,15],[42,45,15,32,45,15],[10,45,15,67,45,15],[20,45,15,61,45,15]];QRCode=function(a,b){"string"==typeof b&&(b={text:b}),b=b||{};var c={width:256,height:256,typeNumber:4,colorDark:"#000000",colorLight:"#ffffff",correctLevel:d.H};for(var e in c)void 0===b[e]&&(b[e]=c[e]);this._htOption=b;this._el=a;this._oQRCode=null;this._bSupportCanvas=!!document.createElement("canvas").getContext;this._android=navigator.userAgent.match(/android/i);this.makeCode(b.text)},QRCode.prototype={makeCode:function(a){this._oQRCode=new b(this._htOption.typeNumber,this._htOption.correctLevel);this._oQRCode.addData(a);this._oQRCode.make();var c=document.createElement("canvas");c.width=this._htOption.width;c.height=this._htOption.height;var d=c.getContext("2d"),e=this._oQRCode.getModuleCount(),f=this._htOption.width/e,g=this._htOption.height/e;d.clearRect(0,0,c.width,c.height);for(var h=0;h<e;h++)for(var i=0;i<e;i++){d.fillStyle=this._oQRCode.isDark(h,i)?this._htOption.colorDark:this._htOption.colorLight;var j=Math.round(i*f),k=Math.round(h*g),l=Math.round((i+1)*f)-j,m=Math.round((h+1)*g)-k;d.fillRect(j,k,l,m)}this._el.appendChild(c)},clear:function(){this._el.innerHTML=""}},QRCode.CorrectLevel=d}();
+</script>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────
+const TEAMS={high:[{name:"Spain",flag:"🇪🇸",odds:"+450"},{name:"France",flag:"🇫🇷",odds:"+475"},{name:"England",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",odds:"+650"},{name:"Brazil",flag:"🇧🇷",odds:"+850"},{name:"Argentina",flag:"🇦🇷",odds:"+900"},{name:"Portugal",flag:"🇵🇹",odds:"+900"},{name:"Germany",flag:"🇩🇪",odds:"14-1"},{name:"Netherlands",flag:"🇳🇱",odds:"20-1"},{name:"Norway",flag:"🇳🇴",odds:"35-1"},{name:"Colombia",flag:"🇨🇴",odds:"40-1"},{name:"Belgium",flag:"🇧🇪",odds:"40-1"},{name:"Morocco",flag:"🇲🇦",odds:"40-1"},{name:"Uruguay",flag:"🇺🇾",odds:"65-1"},{name:"USA",flag:"🇺🇸",odds:"60-1"},{name:"Japan",flag:"🇯🇵",odds:"60-1"},{name:"Türkiye",flag:"🇹🇷",odds:"80-1"}],medium:[{name:"Mexico",flag:"🇲🇽",odds:"100-1"},{name:"Switzerland",flag:"🇨🇭",odds:"100-1"},{name:"Sweden",flag:"🇸🇪",odds:"100-1"},{name:"Senegal",flag:"🇸🇳",odds:"100-1"},{name:"Ecuador",flag:"🇪🇨",odds:"125-1"},{name:"South Korea",flag:"🇰🇷",odds:"125-1"},{name:"Croatia",flag:"🇭🇷",odds:"125-1"},{name:"Austria",flag:"🇦🇹",odds:"125-1"},{name:"Ivory Coast",flag:"🇨🇮",odds:"150-1"},{name:"Canada",flag:"🇨🇦",odds:"200-1"},{name:"Australia",flag:"🇦🇺",odds:"200-1"},{name:"Egypt",flag:"🇪🇬",odds:"200-1"},{name:"Czechia",flag:"🇨🇿",odds:"200-1"},{name:"Scotland",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",odds:"200-1"},{name:"Algeria",flag:"🇩🇿",odds:"250-1"},{name:"Iran",flag:"🇮🇷",odds:"250-1"}],low:[{name:"Paraguay",flag:"🇵🇾",odds:"300-1"},{name:"Ghana",flag:"🇬🇭",odds:"300-1"},{name:"Tunisia",flag:"🇹🇳",odds:"300-1"},{name:"Bosnia & Herz.",flag:"🇧🇦",odds:"350-1"},{name:"DR Congo",flag:"🇨🇩",odds:"350-1"},{name:"Saudi Arabia",flag:"🇸🇦",odds:"400-1"},{name:"South Africa",flag:"🇿🇦",odds:"400-1"},{name:"Panama",flag:"🇵🇦",odds:"500-1"},{name:"Iraq",flag:"🇮🇶",odds:"500-1"},{name:"Uzbekistan",flag:"🇺🇿",odds:"500-1"},{name:"Jordan",flag:"🇯🇴",odds:"500-1"},{name:"Qatar",flag:"🇶🇦",odds:"750-1"},{name:"New Zealand",flag:"🇳🇿",odds:"750-1"},{name:"Cabo Verde",flag:"🇨🇻",odds:"1000-1"},{name:"Haiti",flag:"🇭🇹",odds:"1000-1"},{name:"Curaçao",flag:"🇨🇼",odds:"1500-1"}]};
+const TIER_CONFIG={high:{label:"🏆 High Chance",color:"#FFD700",bg:"#1a1400",border:"#FFD700"},medium:{label:"⚽ Medium Chance",color:"#60CFFF",bg:"#001a26",border:"#60CFFF"},low:{label:"🎲 Low Chance",color:"#FF8C42",bg:"#1a0d00",border:"#FF8C42"}};
+const TIERS=["high","medium","low"];
+const PC=["#FF6B6B","#4ECDC4","#45B7D1","#FED766","#C7CEEA"];
+
+// ── State ─────────────────────────────────────────────────────────────────
+let state={phase:"setup",numPlayers:5,playerNames:["Katie","Cara","Lu","Dave","Mum"],picks:{},myIdx:null,myDrawn:{},animating:null};
+
+// ── Helpers ───────────────────────────────────────────────────────────────
+function shuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function getTeamInfo(n){for(const t of Object.values(TEAMS)){const f=t.find(x=>x.name===n);if(f)return f}return null}
+function getTeamTier(n){for(const[tier,t]of Object.entries(TEAMS)){if(t.find(x=>x.name===n))return tier}return null}
+function getPlayerTeams(picks,idx){const r={high:null,medium:null,low:null};for(const[n,i]of Object.entries(picks)){if(i===idx){const t=getTeamTier(n);if(t)r[t]=n}}return r}
+function ini(n,i){return(n||`P${i+1}`).slice(0,2).toUpperCase()}
+
+// ── Actions ───────────────────────────────────────────────────────────────
+function setNum(n){state.numPlayers=n;while(state.playerNames.length<n)state.playerNames.push("");render()}
+function updateName(i,v){state.playerNames[i]=v}
+
+function runDraw(){
+  const names=state.playerNames.slice(0,state.numPlayers).map((n,i)=>n||`Player ${i+1}`);
+  state.playerNames=names;
+  const sh={high:shuffle(TEAMS.high),medium:shuffle(TEAMS.medium),low:shuffle(TEAMS.low)};
+  const picks={};
+  TIERS.forEach(tier=>{const pool=[...sh[tier]];names.forEach((_,pi)=>{const t=pool.shift();if(t)picks[t.name]=pi})});
+  state.picks=picks;
+  state.phase="qr";
+  render();
+}
+
+function selectPlayer(i){state.myIdx=i;state.myDrawn={};state.animating=null;state.phase="draw";render()}
+function drawTier(tier){
+  if(state.myDrawn[tier]||state.animating)return;
+  const team=getPlayerTeams(state.picks,state.myIdx)[tier];
+  if(!team)return;
+  state.animating=tier;render();
+  setTimeout(()=>{state.myDrawn[tier]=team;state.animating=null;render()},700);
+}
+function goBack(){state.phase="who";render()}
+function restart(){state={phase:"setup",numPlayers:5,playerNames:["","","","",""],picks:{},myIdx:null,myDrawn:{},animating:null};render()}
+
+// ── Load from hash (when someone scans QR) ────────────────────────────────
+function tryLoadHash(){
+  const hash=window.location.hash.slice(1);
+  if(!hash)return false;
+  try{
+    const d=JSON.parse(decodeURIComponent(escape(atob(hash))));
+    if(d&&d.p&&d.k){
+      state.playerNames=d.p;state.numPlayers=d.p.length;state.picks=d.k;state.phase="who";return true;
+    }
+  }catch(e){}
+  return false;
+}
+
+// ── Render ────────────────────────────────────────────────────────────────
+function render(){
+  const root=document.getElementById('root');
+  switch(state.phase){
+    case"setup": root.innerHTML=renderSetup();break;
+    case"qr":    root.innerHTML=renderQR();break;
+    case"who":   root.innerHTML=renderWho();break;
+    case"draw":  root.innerHTML=renderDraw();break;
+  }
+}
+
+// ── Setup ─────────────────────────────────────────────────────────────────
+function renderSetup(){
+  const nums=[2,3,4,5,6,7,8].map(n=>`<button class="num-btn${state.numPlayers===n?' active':''}" onclick="setNum(${n})">${n}</button>`).join('');
+  const inputs=Array.from({length:state.numPlayers},(_,i)=>`<input type="text" id="name-${i}" value="${state.playerNames[i]||''}" placeholder="Player ${i+1}" style="border-color:${PC[i%PC.length]}55" oninput="updateName(${i},this.value)">`).join('');
+  return`<div class="page">
+    <div style="font-size:52px;text-align:center;margin-bottom:4px">🏆</div>
+    <h1 class="title">WORLD CUP 2026</h1>
+    <p class="subtitle">Family Sweepstake</p>
+    <span class="label">Number of players</span>
+    <div class="num-row">${nums}</div>
+    <span class="label">Player names</span>
+    ${inputs}
+    <div class="info-box" style="margin-top:16px">Teams are drawn randomly and kept <strong>secret</strong>. You'll get a QR code — everyone scans it with their phone camera, picks their name, and draws their teams.</div>
+    <button class="btn-primary" onclick="runDraw()">RUN THE DRAW 🎲</button>
+  </div>`;
+}
+
+// ── QR screen ─────────────────────────────────────────────────────────────
+function buildShareUrl(){
+  const payload=JSON.stringify({p:state.playerNames,k:state.picks});
+  const encoded=btoa(unescape(encodeURIComponent(payload)));
+  const base='https://katiek96.github.io/World-Cup-Sweepstake-/worldcup-sweepstake.html';
+  return base+'#'+encoded;
+}
+
+function copyShareUrl(){
+  const ta=document.getElementById('share-url');
+  ta.select();
+  navigator.clipboard.writeText(ta.value).then(()=>{
+    const btn=document.getElementById('copy-btn');
+    btn.textContent='✓ Copied! Paste into WhatsApp';
+    setTimeout(()=>{btn.textContent='📋 Copy Link'},3000);
+  }).catch(()=>{document.execCommand('copy')});
+}
+function renderQR(){
+  const url=buildShareUrl();
+  return`<div class="page">
+    <div style="font-size:48px;text-align:center">🎉</div>
+    <h1 class="title">DRAW COMPLETE</h1>
+    <p class="subtitle">All teams assigned secretly</p>
+    <div style="background:#111;border:1px solid #2a2a2a;border-radius:16px;padding:22px;margin-bottom:16px">
+      <p style="font-weight:bold;font-size:16px;margin-bottom:6px">📲 Share this link in WhatsApp</p>
+      <p style="color:#666;font-size:13px;line-height:1.6;margin-bottom:14px">Copy this and paste it into your family group chat. Everyone taps it, picks their name and draws their teams.</p>
+      <textarea id="share-url" readonly rows="3" onclick="this.select()" style="width:100%;background:#0a0a0f;border:1px solid #333;border-radius:8px;padding:10px;color:#aaa;font-size:11px;font-family:monospace;resize:none;outline:none;margin-bottom:10px">${url}</textarea>
+      <button onclick="copyShareUrl()" id="copy-btn" style="width:100%;padding:13px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:900;font-size:16px;border:none;border-radius:10px;cursor:pointer;font-family:inherit">📋 Copy Link</button>
+    </div>
+    <div style="background:#0f0f0f;border:1px solid #1a1a1a;border-radius:12px;padding:16px;margin-bottom:14px">
+      <p class="label" style="margin-bottom:10px">Players in this draw</p>
+      ${state.playerNames.map((n,i)=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div class="avatar" style="width:28px;height:28px;font-size:10px;background:${PC[i%PC.length]}22;border:1px solid ${PC[i%PC.length]}66;color:${PC[i%PC.length]}">${ini(n,i)}</div><span style="color:#aaa;font-size:14px">${n}</span><span style="margin-left:auto;color:#333;font-size:12px">3 teams ✓</span></div>`).join('')}
+    </div>
+    <button class="btn-ghost" onclick="restart()">↩ Start New Draw</button>
+  </div>`;
+}
+
+function showQR(){
+  const url=buildShareUrl();
+  const el=document.getElementById('qr-canvas');
+  if(!el)return;
+  new QRCode(el,{text:url,width:220,height:220,colorDark:"#000",colorLight:"#fff",correctLevel:QRCode.CorrectLevel.M});
+}
+
+// ── Who are you ───────────────────────────────────────────────────────────
+function renderWho(){
+  const btns=state.playerNames.map((n,i)=>{const c=PC[i%PC.length];return`<button class="player-btn" style="border:1px solid ${c}44" onclick="selectPlayer(${i})"><div class="avatar" style="width:40px;height:40px;font-size:13px;background:${c}22;border:2px solid ${c}88;color:${c}">${ini(n,i)}</div><div style="flex:1"><div style="color:#fff;font-weight:bold;font-size:16px">${n}</div><div style="color:#555;font-size:12px;margin-top:2px">Draw your teams →</div></div><span style="color:${c};font-size:18px">→</span></button>`;}).join('');
+  return`<div class="page"><div style="font-size:44px;text-align:center;margin-bottom:8px">👋</div><h1 class="title">WORLD CUP 2026</h1><p class="subtitle">Who are you?</p><p style="color:#555;font-size:13px;text-align:center;margin-bottom:24px">Select your name to draw your teams</p>${btns}</div>`;
+}
+
+// ── Personal draw ─────────────────────────────────────────────────────────
+function renderDraw(){
+  const idx=state.myIdx,name=state.playerNames[idx],color=PC[idx%PC.length];
+  const allDrawn=TIERS.every(t=>state.myDrawn[t]),nextTier=TIERS.find(t=>!state.myDrawn[t]);
+  const slots=TIERS.map(tier=>{
+    const cfg=TIER_CONFIG[tier],drawnName=state.myDrawn[tier],team=drawnName?getTeamInfo(drawnName):null;
+    const isAnim=state.animating===tier,isNext=tier===nextTier&&!allDrawn,isLocked=!drawnName&&!isNext&&!isAnim;
+    const bg=drawnName?cfg.bg:"#0f0f0f",bc=drawnName?cfg.border:isNext?cfg.border+"66":"#1a1a1a",tc=(drawnName||isNext)?cfg.color:"#333";
+    let inner="";
+    if(team&&!isAnim)inner=`<div class="team-revealed"><span style="font-size:36px">${team.flag}</span><div><div style="font-weight:900;font-size:20px">${team.name}</div><div style="color:#555;font-size:12px;margin-top:2px">Odds: ${team.odds}</div></div></div>`;
+    else if(isAnim)inner=`<div style="display:flex;align-items:center;gap:12px;font-weight:bold;font-size:16px;color:${cfg.color}"><span class="spinning">⚽</span> Drawing…</div>`;
+    else if(isNext)inner=`<button class="draw-btn" style="background:linear-gradient(135deg,${cfg.color}22,${cfg.color}11);border-color:${cfg.border};color:${cfg.color}" onclick="drawTier('${tier}')"><span style="font-size:22px">🎱</span> Draw my ${tier} chance team</button>`;
+    else inner=`<div class="locked-msg">🔒 Draw previous categories first</div>`;
+    return`<div class="tier-slot" style="background:${bg};border:1px solid ${bc}"><div class="tier-tag" style="border:1px solid ${cfg.color}44;color:${tc}">${cfg.label}</div>${inner}</div>`;
+  }).join('');
+  const wd=allDrawn?`<div class="well-done"><div style="font-size:32px;margin-bottom:8px">🎉</div><p style="font-weight:bold;font-size:16px;margin-bottom:4px">Good luck ${name}!</p><p style="color:#555;font-size:13px">The World Cup kicks off June 11</p></div>`:"";
+  return`<div class="page"><div style="text-align:center;margin-bottom:24px"><div class="avatar" style="width:52px;height:52px;margin:0 auto 12px;background:${color}22;border:2px solid ${color};font-size:16px;font-weight:bold;color:${color}">${ini(name,idx)}</div><h2 class="title" style="font-size:clamp(20px,5vw,30px)">${name}</h2><p style="color:#555;font-size:13px;margin-top:4px;letter-spacing:.1em;text-transform:uppercase">${allDrawn?"Your teams are set! ⚽":"Draw your teams one by one"}</p></div>${slots}${wd}<button class="btn-ghost" onclick="goBack()">← Back to player list</button></div>`;
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────
+window.setNum=setNum;window.updateName=updateName;window.runDraw=runDraw;
+window.selectPlayer=selectPlayer;window.drawTier=drawTier;window.goBack=goBack;window.restart=restart;window.copyShareUrl=copyShareUrl;
+
+if(!tryLoadHash())render();
+else render();
+</script>
+</body>
+</html>
